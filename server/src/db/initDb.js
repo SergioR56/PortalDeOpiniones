@@ -6,6 +6,7 @@ const getDb = require('./getDb');
 
 //Funcion que borrara las tablas de la base de datos (si existe) y las volvera a crear.
 const main = async () => {
+    // Variable que almacenará una conexión libre con la base de datos.
     let connection;
     try {
         connection = await getDb();
