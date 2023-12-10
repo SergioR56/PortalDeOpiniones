@@ -1,0 +1,65 @@
+.post-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 1rem;
+}
+
+.post-footer > div {
+    display: flex;
+    align-items: center;
+}
+
+.post-footer > div > div.heart {
+    cursor: pointer;
+    height: 70px;
+    width: 70px;
+    background-image: url('/heart_animation.png');
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: 2900%;
+}
+
+.post-footer > div > div.heart:hover {
+    background-position: right;
+}
+
+.post-footer > div > div.heart.like {
+    animation: heart-burst 0.8s steps(28) 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes heart-burst {
+    from {
+        background-position: left;
+    }
+    to {
+        background-position: right;
+    }
+}
+
+.post-footer > div > div.off {
+    cursor: pointer;
+    height: 70px;
+    width: 70px;
+    background-image: url('/heart_animation.png');
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: 2900%;
+}
+.post-footer > div > div.off:hover {
+    background-position: left;
+}
+
+.post-footer > div > div.off.like {
+    animation: off-burst 0.8s steps(28) 1;
+    animation-fill-mode: forwards;
+}
+@keyframes off-burst {
+    from {
+        background-position: left;
+    }
+    to {
+        background-position: right;
+    }
+}

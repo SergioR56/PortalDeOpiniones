@@ -1,0 +1,11 @@
+.post-list {
+    margin-top: 2rem;
+    list-style: none;
+    min-width: 600px;
+    overflow-anchor: none ;
+}
+
+.no-posts {
+    margin-top: 2rem;
+    text-align: center;
+}

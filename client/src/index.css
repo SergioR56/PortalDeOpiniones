@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+body {
+    font-family: Arial, sans-serif;
+}
+
 div.app {
   display: flex;
   flex-direction: column;
@@ -15,5 +19,41 @@ div.app {
 }
 
 main {
-  flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+    margin-bottom: 6rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+form > input {
+    margin-bottom: 1rem;
+    padding: 0.3rem;
+    font-size: 1.1rem;
+}
+
+form button,
+.post-footer button {
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(118, 118, 118);
+    cursor: pointer;
+}
+
+input,
+button {
+    height: 40px;
+}
+
+h2 {
+    margin: 2rem 0;
 }
