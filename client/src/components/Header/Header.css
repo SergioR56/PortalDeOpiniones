@@ -1,0 +1,8 @@
+div.app > header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--purple-color);
+    color: white;
+    padding: 16px 52px;
+}
