@@ -6,6 +6,7 @@ import PostSearchPage from './pages/PostSearchPage/PostSearchPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
 import LoginPage from './pages/LoginPage/LoginPage';
+import PostCreatePage from './pages/PostCreatePage/PostCreatePage';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path='/' element={<PostSearchPage />} />
         <Route path='/register' element={<RegisterPage />} />
         <Route path='/login' element={<LoginPage />} />
+        <Route path='/message' element={<PostCreatePage />} />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
       <Footer />

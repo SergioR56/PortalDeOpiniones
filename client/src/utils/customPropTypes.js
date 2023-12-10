@@ -18,5 +18,4 @@ export const userPropTypes = PropTypes.shape({
   username: PropTypes.string.isRequired,
   avatar: PropTypes.string,
   role: PropTypes.string.isRequired,
-  createdAt: PropTypes.string.isRequired,
 });

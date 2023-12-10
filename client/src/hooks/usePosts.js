@@ -30,6 +30,7 @@ export const usePosts = () => {
     fetchPosts();
   }, [searchParams]);
 
+
   //Funcion que modifica el State para agregar o eliminar un like.
   const likePostById = (postId) => {
     //Creamos un nuevo array donde modificaremos exclusivamente el post sobre el cual el usuario quiere agregar o eliminar un like.
