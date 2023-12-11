@@ -17,6 +17,7 @@ import {
   getPrivateProfileService,
   signInService,
   signUpService,
+  updateProfileService,
 } from '../services/userService';
 
 //Creamos el contexto de autenticación.
@@ -28,7 +29,7 @@ export const AuthProvider = ({ children }) => {
   const {setErrMsg}=useError();
 
   const [authUser, setAuthUser] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authToken, setAuthToken] = useState(getToken());
   const [loading, setLoading] = useState(false);
 
   //Función que retorna los datos del usuario.
@@ -39,6 +40,10 @@ export const AuthProvider = ({ children }) => {
 
         const body = await getPrivateProfileService();
 
+        if (body.status === 'error') {
+          throw new Error(body.message);
+        }
+
         setAuthUser(body.data.user);
       } catch (err) {
         setErrMsg(err.message);
@@ -47,12 +52,9 @@ export const AuthProvider = ({ children }) => {
       }
     };
 
-    //Obtenemos el token.
-    const token = getToken();
-
     //Si existe token solicitamos los datos del usuario.
-    if (token) fetchUser();
-  }, [isAuthenticated, setErrMsg]);
+    if (authToken) fetchUser();
+  }, [authToken, setErrMsg]);
 
   //Funcion que registra usuario en la base de datos
   const authRegister = async (username, email, password, repeatedPassword) => {
@@ -78,7 +80,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Función que logea a un usuario retornando un token.
+  //Función que logea a un usuario retornando un token.
   const authLogin = async (email, password) => {
     try {
       setLoading(true);
@@ -89,11 +91,11 @@ export const AuthProvider = ({ children }) => {
         throw new Error(body.message);
       }
 
-  // Almacenamos el token en el localStorage. Dado que la variable "token" es un string no es necesario aplicar el JSON.stringify.
+  //Almacenamos el token en el localStorage. Dado que la variable "token" es un string no es necesario aplicar el JSON.stringify.
   localStorage.setItem(TOKEN_LOCAL_STORAGE_KEY, body.data.token);
 
-  // Almacenamos el token en el State.
-      setIsAuthenticated(true);
+  //Almacenamos el token en el State.
+      setAuthToken(body.data.token);
     } catch (err) {
       setErrMsg(err.message);
     } finally {
@@ -106,37 +108,37 @@ export const AuthProvider = ({ children }) => {
   // Eliminamos el token del localStorage.
   localStorage.removeItem(TOKEN_LOCAL_STORAGE_KEY);
 
-  // Eliminamos los datos del usuario y el token del State
+  //Eliminamos los datos del usuario y el token del State
   setAuthUser(null);
-  setIsAuthenticated(false);
+  setAuthToken(null);
   navigate('/');
   };
 
   //Función que actualiza perfil de usuario
-  // const authUpdate = async (username, email, password) => {
-  //   try {
-  //     setLoading(true);
+  const authUpdate = async (username, email, password) => {
+    try {
+      setLoading(true);
 
-  //     const body = await updateProfileService(username, email, password);
+      const body = await updateProfileService(username, email, password);
 
-  //     if (body.status === 'error') {
-  //       throw new Error(body.message);
-  //     }
+      if (body.status === 'error') {
+        throw new Error(body.message);
+      }
 
-  //     // Actualizamos los datos del ususario en el State.
-  //     setAuthUser({
-  //       ...authUser,
-  //       username,
-  //       email,
-  //     });
+      // Actualizamos los datos del ususario en el State.
+      setAuthUser({
+        ...authUser,
+        username,
+        email,
+      });
 
-  //     navigate('/');
-  //   } catch (err) {
-  //     setErrMsg(err.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+      navigate('/');
+    } catch (err) {
+      setErrMsg(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <AuthContext.Provider
@@ -145,6 +147,7 @@ export const AuthProvider = ({ children }) => {
         authRegister,
         authLogin,
         authLogout,
+        authUpdate,
         loading,
       }}
     >

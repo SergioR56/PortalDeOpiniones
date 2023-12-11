@@ -25,6 +25,7 @@ const loginUserController = async (req, res, next) => {
 
         //Obtenemos los datos del usuario.
         const user = await selectUserByEmailModel(email);
+        
         //Comprobamos si la contraseña que ha insertado el usuario es correcta.
         const validPassword = await bcrypt.compare(password, user.password);
 

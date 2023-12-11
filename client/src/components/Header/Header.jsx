@@ -15,8 +15,7 @@ const Header = () => {
       </h1>
       <nav>
         <ul>
-          {authUser && <span>@{authUser.username}</span>}
-
+          <li>{authUser && <span>@{authUser.username}</span>}</li>
           {authUser && (
             <li>
               <NavLink to='/update'>Actualizar perfil</NavLink>
@@ -50,7 +49,7 @@ const Header = () => {
                   <path
                     strokeLinecap='round'
                     strokeLinejoin='round'
-                    d='M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z'
+                    d='M12 9v6m3-3H9m12 0a9 10 0 11-18 0 9 9 0 0118 0z'
                   />
                 </svg>
               </NavLink>

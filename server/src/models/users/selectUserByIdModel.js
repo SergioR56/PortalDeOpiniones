@@ -20,7 +20,6 @@ const selectUserByIdModel = async (userId) => {
             notFoundError('user');
         }
 
-        //Dado que no puede existir más de un usuario con un email determinado, en caso de que en el array de usuarios haya algún usuario este estará en la posición 0.
         return users[0];
     } finally {
         if (connection) connection.release();

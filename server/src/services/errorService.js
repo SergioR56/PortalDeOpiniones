@@ -34,13 +34,12 @@ module.exports = {
             message: 'No se puede dar like más de una vez al mismo elemento',
         };
     },
-    missingFieldsError (){
+    missingFieldsError() {
         throw {
             httpStatus: 400, // Bad request
             code: 'MISSING_FIELDS',
             message: 'Faltan campos',
         };
-    
     },
     notAuthenticatedError() {
         throw {
@@ -75,6 +74,13 @@ module.exports = {
             httpStatus: 409, // Conflict
             code: 'USER_ALREADY_REGISTERED',
             message: 'El nombre de usuario ya está registrado',
+        };
+    },
+    sameUserDataError() {
+        throw {
+            httpStatus: 409, // Conflict
+            code: 'SAME_DATA_USE',
+            message: 'No se ha modificado ningún campo.',
         };
     },
 };

@@ -55,3 +55,29 @@ export const getPrivateProfileService = async () => {
 
   return body;
 };
+
+//Actualizar perfil de usuario
+export const updateProfileService = async (
+  username,
+  email,
+  password
+) => {
+  const token = getToken();
+
+  const res = await fetch(`${baseURL}/users/update`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token,
+    },
+    body: JSON.stringify({
+      username,
+      email,
+      password,
+    }),
+  });
+
+  const body = await res.json();
+
+  return body;
+};
