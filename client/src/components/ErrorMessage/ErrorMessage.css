@@ -1,0 +1,14 @@
+.error-message {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.error-message > p {
+    color: red;
+    font-weight: bold;
+}

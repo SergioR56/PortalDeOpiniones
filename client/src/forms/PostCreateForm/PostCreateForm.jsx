@@ -1,20 +1,22 @@
 //Importamos los hooks.
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useError } from '../../hooks/useError';
 
 //Importamos los servicios.
 import { createPostService } from '../../services/postService';
 
-//Funcion que permite previsualizar una imagen
+//Funcion que permite previsualizar una imagen y borrarla.
 import { handleAddFilePreview } from '../../utils/handleAddFilePreview';
+import { handleRemoveFilePreview } from '../../utils/handleRemoveFilePreview';
 
 //Importamos los estilos.
 import './PostCreateForm.css';
-import { handleRemoveFilePreview } from '../../utils/handleRemoveFilePreview';
 
 const PostCreateForm = () => {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
+  const { setErrMsg } = useError();
 
   const [text, setText] = useState('');
   const [file, setFile] = useState(null);
@@ -36,12 +38,16 @@ const PostCreateForm = () => {
       }
 
       //Creamos el post en la base de datos.
-      await createPostService(formData);
+      const body = await createPostService(formData);
+
+      if (body.status === 'error') {
+        throw new Error(body.message);
+      }
 
       //Redirigimos a la pagina principal.
       navigate('/');
     } catch (err) {
-      alert(err.message);
+      setErrMsg(err.message);
     } finally {
       setLoading(false);
     }

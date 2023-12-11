@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 // Importamos la función que crea un contexto y los hooks.
 import { createContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useError } from '../hooks/useError';
 
 // Importamos el nombre con el que guardamos el token en el localStorage.
 import { TOKEN_LOCAL_STORAGE_KEY } from '../utils/constants';
@@ -24,6 +25,7 @@ export const AuthContext = createContext(null);
 //Creamos el componente provider del contexto.
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
+  const {setErrMsg}=useError();
 
   const [authUser, setAuthUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -39,7 +41,7 @@ export const AuthProvider = ({ children }) => {
 
         setAuthUser(body.data.user);
       } catch (err) {
-        alert(err.message);
+        setErrMsg(err.message);
       } finally {
         setLoading(false);
       }
@@ -50,7 +52,7 @@ export const AuthProvider = ({ children }) => {
 
     //Si existe token solicitamos los datos del usuario.
     if (token) fetchUser();
-  }, [isAuthenticated]);
+  }, [isAuthenticated, setErrMsg]);
 
   //Funcion que registra usuario en la base de datos
   const authRegister = async (username, email, password, repeatedPassword) => {
@@ -70,7 +72,7 @@ export const AuthProvider = ({ children }) => {
       //Una vez registrados redirigimos a la página de login.
       navigate('/login');
     } catch (err) {
-      alert(err.message);
+      setErrMsg(err.message);
     } finally {
       setLoading(false);
     }
@@ -93,7 +95,7 @@ export const AuthProvider = ({ children }) => {
   // Almacenamos el token en el State.
       setIsAuthenticated(true);
     } catch (err) {
-      alert(err.message);
+      setErrMsg(err.message);
     } finally {
       setLoading(false);
     }
@@ -111,13 +113,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   //Función que actualiza perfil de usuario
-  // const authUpdate = async (username, email, password, repeatedPassword) => {
+  // const authUpdate = async (username, email, password) => {
   //   try {
   //     setLoading(true);
-
-  //     if (password !== repeatedPassword) {
-  //       throw new Error('Las contraseñas deben coincidir');
-  //     }
 
   //     const body = await updateProfileService(username, email, password);
 

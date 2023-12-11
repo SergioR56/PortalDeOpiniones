@@ -7,9 +7,13 @@ import './PostFooter.css';
 
 //Importamos los hooks.
 import { useState } from 'react';
+import { useError } from '../../../hooks/useError';
 
 //Importamos los servicios.
-import { likePostService, deletePostService } from '../../../services/postService';
+import {
+  likePostService,
+  deletePostService,
+} from '../../../services/postService';
 
 const PostFooter = ({
   authUser,
@@ -20,6 +24,8 @@ const PostFooter = ({
   likePostById,
   deletePostById,
 }) => {
+  const { setErrMsg } = useError();
+
   const [loading, setLoading] = useState(false);
 
   //Función que modifica un like.
@@ -31,12 +37,16 @@ const PostFooter = ({
       const method = likedByMe ? 'delete' : 'post';
 
       //Modificamos el like en la base de datos.
-      await likePostService(postId, method);
+      const body = await likePostService(postId, method);
+
+      if (body.status === 'error') {
+        throw new Error(body.message);
+      }
 
       //Modificamos el array de posts en el State.
       likePostById(postId);
     } catch (err) {
-      alert(err.message);
+      setErrMsg(err.message);
     } finally {
       setLoading(false);
     }
@@ -49,12 +59,16 @@ const PostFooter = ({
         setLoading(true);
 
         // Eliminamos el post en la base de datos.
-        await deletePostService(postId);
+        const body = await deletePostService(postId);
+
+        if (body.status === 'error') {
+          throw new Error(body.message);
+        }
 
         // Modificamos el array de posts en el State.
         deletePostById(postId);
       } catch (err) {
-        alert(err.message);
+        setErrMsg(err.message);
       } finally {
         setLoading(false);
       }

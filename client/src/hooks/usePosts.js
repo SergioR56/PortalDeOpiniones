@@ -1,11 +1,13 @@
 //Importamos los hooks.
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useError } from './useError';
 
 //Importamos los servicios.
 import { listPostService } from '../services/postService';
 
 export const usePosts = () => {
+  const { setErrMsg } = useError();
   const [posts, setPosts] = useState();
   const [searchParams, setSearchParams] = useSearchParams();
   const [loading, setLoading] = useState(false);
@@ -20,7 +22,7 @@ export const usePosts = () => {
 
         setPosts(body.data.posts);
       } catch (err) {
-        alert(err.message);
+        setErrMsg(err.message);
       } finally {
         setLoading(false);
       }
@@ -28,8 +30,7 @@ export const usePosts = () => {
 
     //Llamamos a la función.
     fetchPosts();
-  }, [searchParams]);
-
+  }, [searchParams, setErrMsg]);
 
   //Funcion que modifica el State para agregar o eliminar un like.
   const likePostById = (postId) => {
