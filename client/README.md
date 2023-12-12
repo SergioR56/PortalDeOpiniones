@@ -1,8 +1,19 @@
-# React + Vite
+# Portal-de-Opiniones
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto consiste en crear una API que funcione como un portal donde la gente pueda dar su opinión sobre cualquier tema.
 
-Currently, two official plugins are available:
+## Instalar en client
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Instalar las dependencias mediante el comando `npm install` o `npm i`.
+2. Guardar el archivo `.env.local.example` como `.env.local` y cubrir los datos necesarios.
+3. Ejecutar `npm run dev` para lanzar el servidor.
+
+## Rutas Web
+
+-   POST `/` - Pagina de inicio.
+-   POST `/register` - Registro de usuario.
+-   POST `/login` - Login de usuario (devuelve token).
+-   PUT `/update` - Editar informacion de usuario.
+-   POST `/message` - Enviar una opinion.
+
+
