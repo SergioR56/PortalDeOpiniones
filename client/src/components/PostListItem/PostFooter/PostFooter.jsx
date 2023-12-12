@@ -5,6 +5,9 @@ import { userPropTypes } from '../../../utils/customPropTypes';
 //Importamos los estilos.
 import './PostFooter.css';
 
+//Importamos los componentes.
+import Swal from 'sweetalert2';
+
 //Importamos los hooks.
 import { useState } from 'react';
 import { useError } from '../../../hooks/useError';
@@ -53,27 +56,36 @@ const PostFooter = ({
   };
 
   // Función que elimina el post.
-  const handleDeletePost = async () => {
-    if (confirm('¿Deseas eliminar el post?')) {
-      try {
-        setLoading(true);
+ const handleDeletePost = async () => {
+   const result = Swal.fire({
+     title: '¿Quieres eliminar el post?',
+     showCancelButton: true,
+     confirmButtonText: 'Eliminar Post',
+   });
 
-        // Eliminamos el post en la base de datos.
-        const body = await deletePostService(postId);
+   if ((await result).isConfirmed) {
+     try {
+       setLoading(true);
 
-        if (body.status === 'error') {
-          throw new Error(body.message);
-        }
+       //Eliminamos el post en la base de datos.
+       const body = await deletePostService(postId);
 
-        // Modificamos el array de posts en el State.
-        deletePostById(postId);
-      } catch (err) {
-        setErrMsg(err.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-  };
+       if (body.status === 'error') {
+         throw new Error(body.message);
+       }
+
+       //Modificamos el array de posts en el State.
+       deletePostById(postId);
+
+       //Mostrar mensaje de éxito después de la eliminación
+       Swal.fire('Eliminado!', '', 'success');
+     } catch (err) {
+       setErrMsg(err.message);
+     } finally {
+       setLoading(false);
+     }
+   }
+ };
 
   return (
     <footer className='post-footer'>

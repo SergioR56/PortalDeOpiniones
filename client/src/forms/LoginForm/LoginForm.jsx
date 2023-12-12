@@ -15,7 +15,7 @@ const LoginForm = ({ authLogin, loading }) => {
         authLogin(email, password);
       }}
     >
-      <label htmlFor='email'>Email:</label>
+      <label htmlFor='email'><b>Email:</b></label>
       <input
         type='email'
         id='email'
@@ -25,7 +25,7 @@ const LoginForm = ({ authLogin, loading }) => {
         required
       />
 
-      <label htmlFor='pass'>Contraseña:</label>
+      <label htmlFor='pass'><b>Contraseña:</b></label>
       <input
         type='password'
         id='pass'

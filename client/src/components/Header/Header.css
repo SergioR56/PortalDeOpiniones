@@ -76,3 +76,23 @@ nav button {
     padding: 0;
 }
 
+.logo {
+    display: flex;
+    text-transform: uppercase;
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-out;
+}
+
+.logo:hover {
+    opacity: 0.6;
+}
+
+.logo svg {
+    width: 28px;
+    height: 28px;
+    flex-basis: 28px;
+    margin-right: 8px;
+}
+

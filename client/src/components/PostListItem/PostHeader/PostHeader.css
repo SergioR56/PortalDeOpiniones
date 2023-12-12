@@ -1,7 +1,7 @@
-li.post > header {
+li.post>header {
     display: flex;
     justify-content: space-between;
     padding: 0.5rem 1rem;
-    background-color: rgb(230, 230, 230);
+    background-color: var(--purple-color);
+    color: #fff;
 }
-

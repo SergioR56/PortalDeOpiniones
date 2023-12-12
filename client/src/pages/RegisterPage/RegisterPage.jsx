@@ -1,6 +1,7 @@
 //Importamos los hooks.
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
+import { NavLink } from 'react-router-dom'
 
 //Importamos los componentes.
 import RegisterForm from '../../forms/RegisterForm/RegisterForm';
@@ -15,6 +16,10 @@ const RegisterPage = () => {
     <main>
       <h2>Registro</h2>
       <RegisterForm authRegister={authRegister} loading={loading} />
+      <li>
+        Si ya te has registrado,<br></br>
+        <NavLink to='/login'>Inicia Sesion</NavLink>
+      </li>
     </main>
   );
 };

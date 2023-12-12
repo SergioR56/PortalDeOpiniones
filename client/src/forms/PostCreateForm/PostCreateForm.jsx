@@ -61,7 +61,9 @@ const PostCreateForm = () => {
         handlePostCreate();
       }}
     >
+      <h1>Añadir una opinion.</h1>
       <textarea
+        placeholder='Deja tu comentario...'
         value={text}
         onChange={(e) => setText(e.target.value)}
         maxLength='500'

@@ -21,7 +21,9 @@ const UpdateForm = ({ authUser, authUpdate, loading }) => {
         authUpdate(username, email, password);
       }}
     >
-      <label htmlFor='username'>Nombre de usuario:</label>
+      <label htmlFor='username'>
+        <b>Nombre de usuario:</b>
+      </label>
       <input
         type='text'
         id='username'
@@ -30,7 +32,7 @@ const UpdateForm = ({ authUser, authUpdate, loading }) => {
         autoFocus
         required
       />
-      <label htmlFor='email'>Email:</label>
+      <label htmlFor='email'><b>Email:</b></label>
       <input
         type='email'
         id='email'
@@ -39,7 +41,7 @@ const UpdateForm = ({ authUser, authUpdate, loading }) => {
         required
       />
 
-      <label htmlFor='pass'>Contraseña:</label>
+      <label htmlFor='pass'><b>Contraseña:</b></label>
       <input
         type='password'
         id='pass'

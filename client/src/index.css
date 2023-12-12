@@ -1,21 +1,22 @@
 :root {
-  --purple-color: #9371ad;
+    --purple-color: #9371ad;
 }
 
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Autour One', sans-serif;
 }
 
 div.app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 main {
@@ -26,17 +27,21 @@ main {
     margin-bottom: 6rem;
 }
 
+
+
 form {
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
 }
 
-form > input {
+form>input {
     margin-bottom: 1rem;
     padding: 0.3rem;
     font-size: 1.1rem;
+
 }
+
 
 form button,
 .post-footer button {
@@ -47,6 +52,22 @@ form button,
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(118, 118, 118);
     cursor: pointer;
+    border-radius: 11px;
+}
+
+main > li {
+    margin-top: 2rem;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    list-style: none;
+}
+
+main > li a {
+    color: #0a009c;
+        transition: all 0.2s ease-out;
+        text-decoration: none;
 }
 
 input,

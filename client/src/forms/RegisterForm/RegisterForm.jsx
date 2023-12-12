@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 
+import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 
 const RegisterForm = ({ authRegister, loading }) => {
@@ -15,7 +16,7 @@ const RegisterForm = ({ authRegister, loading }) => {
         authRegister(username, email, password, repeatedPassword);
       }}
     >
-      <label htmlFor='username'>Nombre de usuario:</label>
+      <label htmlFor='username'><b>Nombre de usuario:</b></label>
       <input
         type='text'
         id='username'
@@ -24,7 +25,7 @@ const RegisterForm = ({ authRegister, loading }) => {
         autoFocus
         required
       />
-      <label htmlFor='email'>Email:</label>
+      <label htmlFor='email'><b>Email:</b></label>
       <input
         type='email'
         id='email'
@@ -32,8 +33,7 @@ const RegisterForm = ({ authRegister, loading }) => {
         onChange={(e) => setEmail(e.target.value)}
         required
       />
-
-      <label htmlFor='pass'>Contraseña:</label>
+      <label htmlFor='pass'><b>Contraseña:</b></label>
       <input
         type='password'
         id='pass'
@@ -43,7 +43,9 @@ const RegisterForm = ({ authRegister, loading }) => {
         maxLength='100'
         required
       />
-      <label htmlFor='repeatedPass'>Confirmar contraseña:</label>
+      <label htmlFor='repeatedPass'>
+        <b>Confirmar contraseña:</b>
+      </label>
       <input
         type='password'
         id='repeatedPass'
@@ -53,10 +55,10 @@ const RegisterForm = ({ authRegister, loading }) => {
         maxLength='100'
         required
       />
-
       <button disabled={loading}>Registrarse</button>
     </form>
-  );
+  ); 
+  
 };
 
 RegisterForm.propTypes = {

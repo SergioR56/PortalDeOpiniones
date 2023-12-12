@@ -19,6 +19,8 @@ const PostSearchForm = ({ setSearchParams, loading }) => {
       }}
     >
       <input
+        className='searching'
+        placeholder='Buscar...'
         type='search'
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
